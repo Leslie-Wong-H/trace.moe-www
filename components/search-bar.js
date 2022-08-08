@@ -32,7 +32,7 @@ export default function SearchBar({
       <div className={searchBarContent}>
         {!searchImageSrc && (
           <div className={greet}>
-            paste or drop image here; trace back the scene from an anime screenshot
+            {/* paste or drop image here; trace back the scene from an anime screenshot */}
           </div>
         )}
         <div className={formControls}>
@@ -53,27 +53,28 @@ export default function SearchBar({
             </div>
           </form>
           {searchImageSrc && (
-            <>
-              <input
-                type="text"
-                className={anilistFilterInput}
-                placeholder="anilist ID"
-                value={anilistFilter}
-                onChange={(e) => {
-                  setAnilistFilter(e.target.value);
-                }}
-              />
-              <button className={cutBordersBtn} onClick={() => setIsCutBorders(!isCutBorders)}>
-                <span className={`icon ${isCutBorders ? iconCheck : iconCross}`}></span> Cut Borders
-              </button>
-              <button
-                className={searchBtn}
-                disabled={isSearching}
-                onClick={() => search(searchImage)}
-              >
-                <span className={iconSearch}></span>
-              </button>
-            </>
+            <div></div>
+            // <>
+            //   <input
+            //     type="text"
+            //     className={anilistFilterInput}
+            //     placeholder="anilist ID"
+            //     value={anilistFilter}
+            //     onChange={(e) => {
+            //       setAnilistFilter(e.target.value);
+            //     }}
+            //   />
+            //   <button className={cutBordersBtn} onClick={() => setIsCutBorders(!isCutBorders)}>
+            //     <span className={`icon ${isCutBorders ? iconCheck : iconCross}`}></span> Cut Borders
+            //   </button>
+            //   <button
+            //     className={searchBtn}
+            //     disabled={isSearching}
+            //     onClick={() => search(searchImage)}
+            //   >
+            //     <span className={iconSearch}></span>
+            //   </button>
+            // </>
           )}
         </div>
       </div>
