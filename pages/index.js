@@ -19,6 +19,12 @@ import {
   playerInfoPane,
   hidden,
   closeBtn,
+  coverImageFrame,
+  coverImageCom,
+  coverBg,
+  coverFg,
+  iframeContainer,
+  iframe,
 } from "../components/index.module.css";
 
 const NEXT_PUBLIC_API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
@@ -240,39 +246,39 @@ const Index = () => {
   };
 
   return (
-    <Layout title="Anime Scene Search Engine">
+    <Layout title="Ultraman Scene Search Engine">
       <Head>
         <meta name="theme-color" content="#f9f9fb" />
-        <meta itemProp="name" content="WAIT: What Anime Is This?" />
+        <meta itemProp="name" content="WAIT: What Ultraman Is This?" />
         <meta
           itemProp="description"
-          content="Anime Scene Search Engine. Lookup the exact moment and the episode."
+          content="Ultraman Scene Search Engine. Lookup the exact moment and the episode."
         />
-        <meta itemProp="image" content="https://trace.moe/favicon128.png" />
+        <meta itemProp="image" content="https://ultraman-shot.cc/favicon128.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@soruly" />
-        <meta name="twitter:title" content="WAIT: What Anime Is This?" />
+        <meta name="twitter:site" content="@LeslieWongH1" />
+        <meta name="twitter:title" content="WAIT: What Ultraman Is This?" />
         <meta
           name="twitter:description"
-          content="Anime Scene Search Engine. Lookup the exact moment and the episode."
+          content="Ultraman Scene Search Engine. Lookup the exact moment and the episode."
         />
-        <meta name="twitter:creator" content="@soruly" />
+        <meta name="twitter:creator" content="@LeslieWongH1" />
         <meta name="twitter:image" content="<%= ogImage %>" />
         <meta
           name="twitter:image:alt"
-          content="Anime Scene Search Engine. Lookup the exact moment and the episode."
+          content="Ultraman Scene Search Engine. Lookup the exact moment and the episode."
         />
 
-        <meta property="og:title" content="WAIT: What Anime Is This?" />
+        <meta property="og:title" content="WAIT: What Ultraman Is This?" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://trace.moe" />
+        <meta property="og:url" content="https://ultraman-shot.cc" />
         <meta property="og:image" content="<%= ogImage %>" />
         <meta
           property="og:description"
-          content="Anime Scene Search Engine. Lookup the exact moment and the episode."
+          content="Ultraman Scene Search Engine. Lookup the exact moment and the episode."
         />
-        <meta property="og:site_name" content="trace.moe" />
+        <meta property="og:site_name" content="ultraman-shot.cc" />
 
         <link rel="dns-prefetch" href={NEXT_PUBLIC_API_ENDPOINT} />
       </Head>
@@ -388,6 +394,23 @@ const Index = () => {
             </div>
           </div>
         )}
+      </div>
+
+      <div className={coverImageFrame}>
+        <div className={coverImageCom}>
+          <div className={coverBg}>
+            <div className={iframeContainer}>
+              <iframe
+                src="/space/index.html"
+                border="0"
+                scrolling="yes"
+                frameBorder="0"
+                className={iframe}
+              ></iframe>
+            </div>
+          </div>
+          <img src="/img/cosmos.png" className={coverFg} alt="" draggable="false" />
+        </div>
       </div>
     </Layout>
   );
