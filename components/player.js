@@ -45,6 +45,7 @@ export default function Player({ src, fileName, onDrop, timeCode, isLoading, isS
   };
 
   useEffect(() => {
+    setPlayerHeight(playerWidth * (9 / 16)); // keep 16:9 ratio
     window.addEventListener("resize", handleResize, false);
   }, []);
 
@@ -141,11 +142,15 @@ export default function Player({ src, fileName, onDrop, timeCode, isLoading, isS
       </div>
       <div
         className={loading}
-        style={{ height: playerHeight, display: playerLoading || isSearching ? "flex" : "none" }}
+        style={{
+          height: playerHeight,
+          width: "100%",
+          display: playerLoading || isSearching ? "flex" : "none",
+        }}
       >
         <div
           className={playerLoading || isSearching ? ripple : ""}
-          style={{ height: (playerHeight - 800) / 2 }}
+          style={{ height: (playerHeight - 800) / 2, width: "100%" }}
         ></div>
       </div>
 
