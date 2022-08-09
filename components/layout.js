@@ -10,13 +10,13 @@ export default function Layout({ children, title }) {
         <meta name="theme-color" content="#f9f9fb" />
         <meta
           name="description"
-          content="Search Anime by ScreenShot. Lookup the exact moment and the episode."
+          content="Search Ultraman by ScreenShot. Lookup the exact moment and the episode."
         />
         <meta
           name="keywords"
-          content="Anime Scene Search, Search by image, Anime Image Search, アニメのキャプ画像"
+          content="Ultraman Scene Search, Search by image, Ultraman Image Search, ウルトラマンのキャプ画像"
         />
-        <title>{title} - trace.moe</title>
+        <title>{title} - Ultraman-shot.cc</title>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="icon" type="image/png" href="/favicon128.png" sizes="128x128" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -106,7 +106,7 @@ export default function Layout({ children, title }) {
           </div>
         </div>
       </footer> */}
-      <script src="https://www.googletagmanager.com/gtag/js?id=UA-70950149-1" async></script>
+      <script src="https://www.googletagmanager.com/gtag/js?id=G-RVVKHD10BN" async></script>
       <script src="/js/gtag.js"></script>
       <script src="/js/pwa.js" defer></script>
     </>
