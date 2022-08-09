@@ -1,10 +1,10 @@
 .searchBar {
-  margin-top: 50vh;
+  margin-top: 60vh;
   transform: translate(0, -110px);
   z-index: 20;
   border-radius: 0.5rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
 }
 @media (max-width: 500px) {
   .searchBar {
@@ -30,9 +30,10 @@
   width: 100%;
   border-radius: 0;
   transform: translate(0, 0);
-  box-shadow: 0 0 20px var(--shadow-color);
+  /* box-shadow: 0 0 20px var(--shadow-color); */
   background: var(--bar-main-color);
   height: 3rem;
+  z-index: 10;
 }
 .searchBarContent {
   width: 100%;
@@ -44,13 +45,19 @@
   align-items: flex-start;
   align-content: space-around;
   justify-content: space-between;
-  box-shadow: 0 0 20px var(--shadow-color);
-  background: var(--bar-draw-color);
+  /* box-shadow: 0 0 20px var(--shadow-color);
+  background: var(--bar-draw-color); */
+  opacity: 0.8;
 }
 .formControls {
   width: 100%;
-  margin: 2rem 1rem 2rem 2rem;
+  /* margin: 2rem 1rem 2rem 2rem; */
   column-gap: 1rem;
+  background: #fff;
+  padding: 1em;
+  border-radius: 10em;
+  transition: box-shadow 300ms ease;
+  box-shadow: 0 0 20px var(--shadow-color);
 }
 .formControls > form {
   display: flex;
@@ -64,16 +71,18 @@
   padding: unset;
   background: transparent;
   box-shadow: unset;
+  opacity: 1;
 }
 .imageUrlInput,
 .anilistFilterInput {
   padding: 0 2rem 0 1rem;
   line-height: 2rem;
-  font-size: 0.75rem;
+  height: 2rem;
+  font-size: 1.2rem;
   vertical-align: bottom;
   outline: 0;
   background: var(--blank-color);
-  border: 1px solid var(--theme-weak-color);
+  border: 1px solid var(--blank-color);
   border-radius: 3px;
   transition: box-shadow 100ms ease-out;
 }
@@ -89,8 +98,8 @@
 }
 .imageUrlInput:focus,
 .anilistFilterInput:focus {
-  box-shadow: 0 0 10px var(--theme-weak-color);
-  border: 1px solid var(--theme-weak-color);
+  /* box-shadow: 0 0 10px var(--theme-weak-color);
+  border: 1px solid var(--theme-weak-color); */
 }
 .anilistFilterInput[disabled],
 .imageUrlInput[disabled] {
@@ -112,6 +121,8 @@
   align-content: space-around;
   justify-content: space-between;
   flex-wrap: nowrap;
+  padding: 1em;
+  margin-top: 0.5rem;
 }
 @media (max-width: 1008px) {
   .searchBarReady .formControls {
@@ -125,6 +136,7 @@
   .searchBarReady .formControls {
     flex-wrap: wrap;
     margin: 0;
+    margin-top: 1rem;
   }
 }
 .searchBarReady .formControls form {
@@ -155,6 +167,7 @@
   opacity: 0;
   overflow: hidden;
   cursor: pointer;
+  width: 2rem;
 }
 .cutBordersBtn {
   white-space: pre;
