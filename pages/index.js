@@ -55,7 +55,7 @@ const Index = () => {
       setSearchImageSrc(
         searchParams.get("url").startsWith(location.origin)
           ? searchParams.get("url")
-          : `/image-proxy?url=${encodeURIComponent(searchParams.get("url"))}`
+          : `https://trace.moe/image-proxy?url=${encodeURIComponent(searchParams.get("url"))}`
       );
     }
     document.addEventListener(
