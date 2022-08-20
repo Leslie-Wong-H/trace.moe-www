@@ -188,7 +188,7 @@
     width: 100%;
   }
   .playerInfoPane {
-    width: 100%;
+    width: calc(100% - 1rem);
     position: absolute;
     transform: translate(0, 0);
   }
