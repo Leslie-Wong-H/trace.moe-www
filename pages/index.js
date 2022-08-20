@@ -41,7 +41,7 @@ const Index = () => {
   const [searchImageSrc, setSearchImageSrc] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [selectedResult, setSelectedResult] = useState();
-  const [showNSFW, setshowNSFW] = useState(false);
+  const [showNSFW, setShowNSFW] = useState(false);
   const [anilistInfo, setAnilistInfo] = useState();
   const [playerSrc, setPlayerSrc] = useState();
   const [playerTimeCode, setPlayerTimeCode] = useState("");
@@ -55,7 +55,7 @@ const Index = () => {
       setSearchImageSrc(
         searchParams.get("url").startsWith(location.origin)
           ? searchParams.get("url")
-          : `/image-proxy?url=${encodeURIComponent(searchParams.get("url"))}`
+          : `https://trace.moe/image-proxy?url=${encodeURIComponent(searchParams.get("url"))}`
       );
     }
     document.addEventListener(
@@ -359,7 +359,7 @@ const Index = () => {
                 <div style={{ textAlign: "center" }}>
                   <button
                     onClick={(e) => {
-                      setshowNSFW(!showNSFW);
+                      setShowNSFW(!showNSFW);
                     }}
                   >
                     {showNSFW ? "Hide" : "Show"}{" "}
