@@ -117,6 +117,7 @@ const Index = () => {
     setIsLoading(true);
     setMessageText("Loading search image...");
     const image = new Image();
+    image.crossOrigin = "";
     image.onload = (e) => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
