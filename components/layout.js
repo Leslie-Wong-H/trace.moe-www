@@ -3,6 +3,7 @@ import Link from "next/link";
 import { footer, container, section, sectionHeader, sectionItem } from "./footer.module.css";
 
 export default function Layout({ children, title }) {
+  const titleString = `${title} - Ultraman-shot.cc`;
   return (
     <>
       <Head>
@@ -16,7 +17,7 @@ export default function Layout({ children, title }) {
           name="keywords"
           content="Ultraman Scene Search, Search by image, Ultraman Image Search, ウルトラマンのキャプ画像"
         />
-        <title>{title} - Ultraman-shot.cc</title>
+        <title>{titleString}</title>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="icon" type="image/png" href="/favicon128.png" sizes="128x128" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
