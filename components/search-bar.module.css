@@ -44,7 +44,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: space-around;
-  justify-content: space-between;
+  justify-content: center;
   /* box-shadow: 0 0 20px var(--shadow-color);
   background: var(--bar-draw-color); */
   opacity: 0.8;
