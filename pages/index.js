@@ -29,7 +29,7 @@ import {
 
 const NEXT_PUBLIC_API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 const NEXT_PUBLIC_ANILIST_ENDPOINT =
-  process.env.NEXT_PUBLIC_ANILIST_ENDPOINT || "https://graphql.anilist.co";
+  process.env.NEXT_PUBLIC_ANILIST_ENDPOINT + "/douban" || "https://graphql.anilist.co";
 
 const Index = () => {
   const [dropTargetText, setDropTargetText] = useState("");
@@ -159,9 +159,17 @@ const Index = () => {
     const res = await fetch(`${NEXT_PUBLIC_API_ENDPOINT}/search?${queryString}`, {
       method: "POST",
       body: formData,
+    }).catch((e) => {
+      console.log(e);
+      setMessageText("Server response overtime, please try again later.");
+      return;
     });
     setIsSearching(false);
 
+    if (!res) {
+      setMessageText("Server response error, please try again later.");
+      return;
+    }
     if (res.status === 429) {
       setMessageText("You searched too many times, please try again later.");
       return;
@@ -172,6 +180,10 @@ const Index = () => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
       search(imageBlob);
+      return;
+    }
+    if (res.status === 504) {
+      setMessageText("Server response overtime, please try again later.");
       return;
     }
     if (res.status >= 400) {
@@ -194,18 +206,13 @@ const Index = () => {
 
     const topResults = result.slice(0, 5);
 
-    let response = await fetch(
-      `${NEXT_PUBLIC_ANILIST_ENDPOINT}${topResults.map((e) => e.anilist)[0]}`,
-      {
-        method: "GET",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-      }
-    ).catch((e) => console.log(e));
-    response = {
-      status: 404,
-    };
-    if (response.status >= 400) {
+    const response = await fetch(NEXT_PUBLIC_ANILIST_ENDPOINT, {
+      method: "POST",
+      body: JSON.stringify({ ids: topResults.map((e) => String(e.anilist)) }),
+      headers: { "Content-Type": "application/json" },
+    }).catch((e) => console.log(e));
+
+    if (!response || response.status >= 400) {
       setMessageText("Failed to get Anilist info, please try again later.");
       const topResultsWithoutAnlist = topResults.map((entry) => {
         const id = entry.anilist;
@@ -226,10 +233,56 @@ const Index = () => {
       topResultsWithoutAnlist[0].playResult();
       return;
     }
-    const anilistData = (await response.json()).data.Page.media;
 
-    const topResultsWithAnlist = topResults.map((entry) => {
-      entry.anilist = anilistData.find((e) => e.id === entry.anilist);
+    const rawData = await response.json();
+
+    const anilistData = rawData.map((e) => {
+      const { data } = e;
+
+      const base = {
+        createdAt: e.createdAt,
+        updatedAt: e.updatedAt,
+        id: e.id,
+        originalName: e.originalName,
+        imdbVotes: e.imdbVotes,
+        imdbRating: e.imdbRating,
+        year: e.year,
+        imdbId: e.imdbId,
+        alias: e.alias,
+        doubanId: e.doubanId,
+        type: e.type,
+        doubanRating: e.doubanRating,
+        doubanVotes: e.doubanVotes,
+        duration: e.duration,
+        episodes: e.episodes,
+        totalSeasons: e.totalSeasons,
+        dateReleased: e.dateReleased,
+      };
+
+      const cn = data[0];
+      cn.poster = cn.poster.replace(
+        "https://wmdb.querydata.org/movie/poster/",
+        "https://poster.ultraman-shot.cc/poster/"
+      );
+      const newCn = Object.assign({}, cn, base);
+
+      const en = data[1] || {}; // In case of empty en
+      Object.keys(en).length > 0 &&
+        (en.poster = en.poster.replace(
+          "https://wmdb.querydata.org/movie/poster/",
+          "https://poster.ultraman-shot.cc/poster/"
+        ));
+      const newEn = Object.assign({}, en, base);
+
+      const polishedData = { cn: newCn, en: newEn };
+
+      const language = navigator.language.split("-")[0];
+
+      return language === "zh" ? polishedData["cn"] : polishedData["en"];
+    });
+
+    const topResultsWithAnilist = topResults.map((entry) => {
+      entry.anilist = anilistData.find((e) => e.doubanId == entry.anilist);
       entry.playResult = () => {
         setSelectedResult(entry);
         setAnilistInfo(entry.anilist);
@@ -239,10 +292,10 @@ const Index = () => {
       };
       return entry;
     });
-    setSearchResult(topResultsWithAnlist);
+    setSearchResult(topResultsWithAnilist);
 
-    if (!topResultsWithAnlist[0].anilist.isAdult && window.innerWidth > 1008) {
-      topResultsWithAnlist[0].playResult();
+    if (!topResultsWithAnilist[0].anilist?.isAdult && window.innerWidth > 1008) {
+      topResultsWithAnilist[0].playResult();
     }
   };
 

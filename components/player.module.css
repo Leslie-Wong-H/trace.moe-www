@@ -55,6 +55,7 @@
   transition: all 300ms ease-out;
   color: var(--text-main-color);
   height: 1rem;
+  padding: 0.5rem 0;
 }
 @media (max-width: 640px) {
   .playerInfo {
@@ -72,6 +73,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+@media (max-width: 450px) {
+  .fileNameDisplay {
+    max-width: 350px;
+  }
 }
 .timeCodeDisplay {
   font-size: 0.7rem;
@@ -106,7 +112,7 @@
 }
 .soundBtn {
   position: absolute;
-  top: -1.1rem;
+  top: -1.6rem;
   right: 0;
   font-size: 1rem;
   width: 1rem;
