@@ -23,7 +23,7 @@ export default function Result({ searchResult: entry, active: isActive }) {
       onClick={entry.playResult}
     >
       <div className={title}>
-        {entry.anilist.title?.native || entry.anilist.title?.romaji || entry.anilist}
+        {entry.anilist?.name || entry.anilist?.originalName || entry.anilist?.alias}
       </div>
       <div className={detail}>
         <div className={ep}>{entry.episode && `Episode ${zeroPad(entry.episode, 2)}`}</div>

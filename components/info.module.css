@@ -24,8 +24,13 @@
 .divider {
   border-bottom: 1px dashed var(--theme-weak-color);
 }
+.poster {
+  align-self: center;
+}
 .poster img {
-  min-width: 230px;
+  width: 230px;
+  min-height: 230px;
+  padding: 15px 10px 0px;
   transition: all 300ms ease-out;
 }
 .detail {

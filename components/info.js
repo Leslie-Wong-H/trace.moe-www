@@ -6,32 +6,55 @@ export default function Layout({ anilist: src }) {
   }
   let naturalText1 = "";
 
-  if (src.duration && src.episodes === 1) {
-    naturalText1 += `${src.duration} minutes `;
-  }
-  if (src.episodes && src.format !== "MOVIE") {
-    naturalText1 += `${src.episodes} episode `;
-  }
-  if (src.duration && src.episodes > 1) {
-    naturalText1 += `${src.duration}-minute `;
-  }
-  if (src.format) {
-    naturalText1 += `${src.format.length > 3 ? src.format.toLowerCase() : src.format} `;
-  }
-  naturalText1 += " anime. ";
+  const {
+    alias,
+    // coutry,
+    // createdAt,
+    dateReleased,
+    description,
+    doubanId,
+    doubanRating,
+    doubanVotes,
+    duration,
+    episodes,
+    genre,
+    // id,
+    // imdbId,
+    imdbRating,
+    imdbVotes,
+    // lang,
+    // langauge,
+    // movie,
+    name,
+    originalName,
+    poster: posterImg,
+    // totalSeasons,
+    type,
+    // updatedAt,
+    // year,
+  } = src;
 
-  let strStartDate =
-    src.startDate && src.startDate.year && src.startDate.month && src.startDate.day
-      ? `${src.startDate.year}-${src.startDate.month}-${src.startDate.day}`
-      : null;
-  let strEndDate =
-    src.endDate && src.endDate.year && src.endDate.month && src.endDate.day
-      ? `${src.endDate.year}-${src.endDate.month}-${src.endDate.day}`
-      : null;
+  if (duration && episodes === 1) {
+    naturalText1 += `${duration} minutes `;
+  }
+  if (episodes && type !== "MOVIE") {
+    naturalText1 += `${episodes} episode `;
+  }
+  // if (duration && episodes > 1) {
+  //   naturalText1 += `${parseInt(duration / episodes)}-minute `;
+  // }
+  if (type) {
+    naturalText1 += `${type} `;
+  }
+  naturalText1 += " Ultraman. ";
+
+  let strStartDate = dateReleased ?? null;
+
+  let strEndDate = null;
 
   let naturalText2 = "";
   if (strStartDate && strEndDate) {
-    if (src.format === "MOVIE") {
+    if (type === "MOVIE") {
       if (strStartDate === strEndDate) {
         naturalText2 += `Released on ${strStartDate}`;
       } else {
@@ -43,8 +66,10 @@ export default function Layout({ anilist: src }) {
       naturalText2 += `Airing from ${strStartDate} to ${strEndDate}`;
     }
   } else if (strStartDate) {
-    if (src.format === "TV" || src.format === "TV_SHORT") {
+    if (type === "TV" || type === "TV_SHORT" || type === "TVSeries") {
       naturalText2 += `Airing since ${strStartDate}`;
+    } else {
+      naturalText2 += `Released on ${strStartDate}`;
     }
   }
 
@@ -52,51 +77,37 @@ export default function Layout({ anilist: src }) {
 
   const synonyms = Array.from(
     new Set(
-      [
-        src.title.chinese || "",
-        src.title.english || "",
-        ...(src.synonyms || []),
-        ...(src.synonyms_chinese || []),
-      ]
+      [...alias.split("/")]
         .filter((e) => e)
-        .filter((e) => e !== src.title.native || e !== src.title.romaji)
+        .sort()
+        .map((title, i) => {
+          return <div key={i}>{title}</div>;
+        })
     )
-  )
-    .sort()
-    .map((title, i) => {
-      return <div key={i}>{title}</div>;
-    });
+  );
 
-  let studio = [];
-  if (src.studios && src.studios && src.studios.edges.length > 0) {
-    studio = src.studios.edges.map((entry, i) => {
-      if (entry.node.siteUrl) {
+  const rating = Array(2)
+    .fill(null)
+    .map((_, i) => {
+      if (i === 0) {
         return (
           <div key={i}>
-            <a href={entry.node.siteUrl}>{entry.node.name}</a>
+            Douban: {doubanRating} ({doubanVotes} votes)
           </div>
         );
       } else {
-        return <div key={i}>{entry.node.name}</div>;
+        return (
+          <div key={i}>
+            IMDB: {imdbRating} ({imdbVotes} votes)
+          </div>
+        );
       }
     });
-  }
-
-  let externalLinks = [];
-  if (src.externalLinks && src.externalLinks.length > 0) {
-    externalLinks = src.externalLinks.map((entry, i) => {
-      return (
-        <div key={i}>
-          <a href={entry.url}>{entry.site}</a>
-        </div>
-      );
-    });
-  }
 
   return (
     <div className={infoPane}>
-      <div className={title}>{src.title.native}</div>
-      <div className={subtitle}>{src.title.romaji}</div>
+      <div className={title}>{name}</div>
+      <div className={subtitle}>{originalName}</div>
       <div className={divider}></div>
 
       <div className={detail}>
@@ -115,23 +126,23 @@ export default function Layout({ anilist: src }) {
             </tr>
             <tr>
               <td>Genre</td>
-              <td>{src.genres.join(", ")}</td>
+              <td>{genre}</td>
             </tr>
             <tr>
-              <td>Studio</td>
-              <td>{studio}</td>
+              <td>Description</td>
+              <td>{description}</td>
             </tr>
             <tr>
-              <td>External Links</td>
-              <td>{externalLinks}</td>
+              <td>Rating</td>
+              <td>{rating}</td>
             </tr>
           </tbody>
         </table>
         <div className={poster}>
-          <a href={`//anilist.co/anime/${src.id}`}>
+          <a href={`//movie.douban.com/subject/${doubanId}/`}>
             <img
-              key={src.coverImage.large}
-              src={src.coverImage.large}
+              key={posterImg}
+              src={posterImg}
               style={{ opacity: 0 }}
               onLoad={(e) => {
                 e.target.style.opacity = 1;
@@ -142,7 +153,7 @@ export default function Layout({ anilist: src }) {
       </div>
       <div className={divider}></div>
       <div className={footNotes}>
-        Information provided by <a href="https://anilist.co">anilist.co</a>
+        Information provided by <a href="https://douban.com">Douban.com</a>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ module.exports = {
             value: [
               "default-src 'self'",
               "object-src 'self'",
-              "script-src 'self' 'unsafe-eval' www.google-analytics.com www.googletagmanager.com static.cloudflareinsights.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' www.google-analytics.com www.googletagmanager.com static.cloudflareinsights.com",
               "style-src * 'self' 'unsafe-inline'",
               `img-src * 'self' data: blob: ${NEXT_PUBLIC_MEDIA_ENDPOINT}`,
               "font-src 'self'",
