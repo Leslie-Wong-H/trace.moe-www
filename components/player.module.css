@@ -112,8 +112,8 @@
 }
 .soundBtn {
   position: absolute;
-  top: -1.6rem;
-  right: 0;
+  /* top: -2rem; */
+  right: 0.5rem;
   font-size: 1rem;
   width: 1rem;
   cursor: pointer;

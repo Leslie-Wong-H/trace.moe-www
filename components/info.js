@@ -7,7 +7,7 @@ export default function Layout({ anilist: src }) {
   let naturalText1 = "";
 
   const {
-    alias,
+    alias = "",
     // coutry,
     // createdAt,
     dateReleased,
