@@ -58,6 +58,8 @@
   .wrap {
     padding: 1rem 1rem;
     margin: 5rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 .searchImageDisplay {
@@ -179,7 +181,7 @@
 
 @media (max-width: 640px) {
   .wrap {
-    /* min-height: 150vh; */
+    min-height: 100vh;
   }
   .closeBtn {
     display: block;
