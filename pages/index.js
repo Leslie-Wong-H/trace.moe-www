@@ -25,6 +25,7 @@ import {
   coverFg,
   iframeContainer,
   iframe,
+  icp,
 } from "../components/index.module.css";
 
 const NEXT_PUBLIC_API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
@@ -464,6 +465,9 @@ const Index = () => {
             </div>
           </div>
           <img src="/img/cosmos.png" className={coverFg} alt="" draggable="false" />
+          <a href="http://beian.miit.gov.cn/" target="_blank">
+            <div className={icp}>粤ICP备18106486号</div>
+          </a>
         </div>
       </div>
     </Layout>
