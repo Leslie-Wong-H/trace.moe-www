@@ -237,50 +237,52 @@ const Index = () => {
 
     const rawData = await response.json();
 
-    const anilistData = rawData.map((e) => {
-      const { data } = e;
+    const anilistData = rawData
+      .filter((e) => !!e)
+      .map((e) => {
+        const { data = [] } = e;
 
-      const base = {
-        createdAt: e.createdAt,
-        updatedAt: e.updatedAt,
-        id: e.id,
-        originalName: e.originalName,
-        imdbVotes: e.imdbVotes,
-        imdbRating: e.imdbRating,
-        year: e.year,
-        imdbId: e.imdbId,
-        alias: e.alias,
-        doubanId: e.doubanId,
-        type: e.type,
-        doubanRating: e.doubanRating,
-        doubanVotes: e.doubanVotes,
-        duration: e.duration,
-        episodes: e.episodes,
-        totalSeasons: e.totalSeasons,
-        dateReleased: e.dateReleased,
-      };
+        const base = {
+          createdAt: e.createdAt,
+          updatedAt: e.updatedAt,
+          id: e.id,
+          originalName: e.originalName,
+          imdbVotes: e.imdbVotes,
+          imdbRating: e.imdbRating,
+          year: e.year,
+          imdbId: e.imdbId,
+          alias: e.alias,
+          doubanId: e.doubanId,
+          type: e.type,
+          doubanRating: e.doubanRating,
+          doubanVotes: e.doubanVotes,
+          duration: e.duration,
+          episodes: e.episodes,
+          totalSeasons: e.totalSeasons,
+          dateReleased: e.dateReleased,
+        };
 
-      const cn = data[0];
-      cn.poster = cn.poster.replace(
-        "https://wmdb.querydata.org/movie/poster/",
-        "https://poster.ultraman-shot.cc/poster/"
-      );
-      const newCn = Object.assign({}, cn, base);
-
-      const en = data[1] || {}; // In case of empty en
-      Object.keys(en).length > 0 &&
-        (en.poster = en.poster.replace(
+        const cn = data[0];
+        cn.poster = cn.poster.replace(
           "https://wmdb.querydata.org/movie/poster/",
-          "https://poster.ultraman-shot.cc/poster/"
-        ));
-      const newEn = Object.assign({}, en, base);
+          "https://poter.ultraman-shot.cc/poster/"
+        );
+        const newCn = Object.assign({}, cn, base);
 
-      const polishedData = { cn: newCn, en: newEn };
+        const en = data[1] || {}; // In case of empty en
+        Object.keys(en).length > 0 &&
+          (en.poster = en.poster.replace(
+            "https://wmdb.querydata.org/movie/poster/",
+            "https://poster.ultraman-shot.cc/poster/"
+          ));
+        const newEn = Object.assign({}, en, base);
 
-      const language = navigator.language.split("-")[0];
+        const polishedData = { cn: newCn, en: newEn };
 
-      return language === "zh" ? polishedData["cn"] : polishedData["en"];
-    });
+        const language = navigator.language.split("-")[0];
+
+        return language === "zh" ? polishedData["cn"] : polishedData["en"];
+      });
 
     const topResultsWithAnilist = topResults.map((entry) => {
       entry.anilist = anilistData.find((e) => e.doubanId == entry.anilist);
