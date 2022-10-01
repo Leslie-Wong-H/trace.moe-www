@@ -88,7 +88,7 @@ const Index = () => {
     }
     if (e.target.parentNode.checkValidity()) {
       setImageURL(e.target.value);
-      setSearchImageSrc(`/image-proxy?url=${encodeURIComponent(e.target.value)}`);
+      setSearchImageSrc(`https://trace.moe/image-proxy?url=${encodeURIComponent(e.target.value)}`);
       history.replaceState(null, null, `/?url=${encodeURIComponent(e.target.value)}`);
     } else {
       e.target.parentNode.querySelector("input[type=submit]").click();
