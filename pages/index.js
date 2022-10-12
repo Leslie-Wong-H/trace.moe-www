@@ -194,10 +194,11 @@ const Index = () => {
     const { frameCount, result } = await res.json();
 
     setMessageText(
-      `Searched ${frameCount.toLocaleString(navigator.language)} frames in ${(
-        (performance.now() - startSearchTime) /
-        1000
-      ).toFixed(2)}s`
+      // `Searched ${frameCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} frames in ${(
+      //   (performance.now() - startSearchTime) /
+      //   1000
+      // ).toFixed(2)}s`
+      `Searched in ${((performance.now() - startSearchTime) / 1000).toFixed(2)}s`
     );
 
     if (result.length === 0) {
