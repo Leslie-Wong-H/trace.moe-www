@@ -286,7 +286,15 @@ const Index = () => {
       });
 
     const topResultsWithAnilist = topResults.map((entry) => {
+      const id = entry.anilist;
       entry.anilist = anilistData.find((e) => e.doubanId == entry.anilist);
+      if (!entry.anilist) {
+        entry.anilist = {
+          id,
+          title: { native: id },
+          isAdult: false,
+        };
+      }
       entry.playResult = () => {
         setSelectedResult(entry);
         setAnilistInfo(entry.anilist);
