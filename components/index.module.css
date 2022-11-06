@@ -68,28 +68,32 @@
   align-items: center;
   align-content: space-around;
   justify-content: space-between;
-  /* background: linear-gradient(
-        0deg,
-        var(--result-draw-color) 0,
-        var(--result-draw-color) 90%,
-        var(--result-line-color) 90%,
-        var(--result-line-color) 100%
-      )
-      0 50%,
-    linear-gradient(
-        90deg,
-        var(--result-draw-color) 0,
-        var(--result-draw-color) 90%,
-        var(--result-line-color) 90%,
-        var(--result-line-color) 100%
-      )
-      50% 0,
-    var(--result-main-color); */
   background: white;
-  background-size: 20px 20px;
   box-shadow: 0 0 20px var(--shadow-color);
   border-radius: 0.5rem;
   overflow: hidden;
+}
+@media (prefers-color-scheme: dark) {
+  .searchImageDisplay {
+    background: linear-gradient(
+          0deg,
+          var(--result-draw-color) 0,
+          var(--result-draw-color) 90%,
+          var(--result-line-color) 90%,
+          var(--result-line-color) 100%
+        )
+        0 50%,
+      linear-gradient(
+          90deg,
+          var(--result-draw-color) 0,
+          var(--result-draw-color) 90%,
+          var(--result-line-color) 90%,
+          var(--result-line-color) 100%
+        )
+        50% 0,
+      var(--result-main-color);
+    background-size: 20px 20px;
+  }
 }
 .messageTextLabel {
   color: var(--text-strong-color);

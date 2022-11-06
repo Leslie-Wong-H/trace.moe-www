@@ -53,7 +53,8 @@
   width: calc(100% - 2.5rem);
   /* margin: 2rem 1rem 2rem 2rem; */
   column-gap: 1rem;
-  background: #fff;
+  box-shadow: 0 0 20px var(--shadow-color);
+  background: var(--bar-draw-color);
   padding: 1em;
   border-radius: 10em;
   transition: box-shadow 300ms ease;
@@ -126,7 +127,7 @@
 }
 @media (max-width: 1008px) {
   .searchBarReady .formControls {
-    margin: .5rem 0 0;
+    margin: 0.5rem 0 0;
   }
 }
 @media (max-width: 500px) {
