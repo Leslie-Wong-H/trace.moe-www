@@ -266,11 +266,11 @@ const Index = () => {
         const cn = data[0];
         cn.poster = cn.poster.replace(
           "https://wmdb.querydata.org/movie/poster/",
-          "https://poter.ultraman-shot.cc/poster/"
+          "https://poster.ultraman-shot.cc/poster/"
         );
         const newCn = Object.assign({}, cn, base);
 
-        const en = data[1] || {}; // In case of empty en
+        const en = data[1] || cn; // In case of empty en
         Object.keys(en).length > 0 &&
           (en.poster = en.poster.replace(
             "https://wmdb.querydata.org/movie/poster/",
