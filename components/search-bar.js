@@ -53,7 +53,7 @@ export default function SearchBar({
             </div>
           </form>
           {searchImageSrc && (
-            <div></div>
+            <></>
             // <>
             //   <input
             //     type="text"

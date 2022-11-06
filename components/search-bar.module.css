@@ -59,6 +59,11 @@
   transition: box-shadow 300ms ease;
   box-shadow: 0 0 20px var(--shadow-color);
 }
+@media (prefers-color-scheme: dark) {
+  .formControls {
+    background: #1a1a1a;
+  }
+}
 .formControls > form {
   display: flex;
   width: 100%;
@@ -126,7 +131,7 @@
 }
 @media (max-width: 1008px) {
   .searchBarReady .formControls {
-    margin: .5rem 0 0;
+    margin: 0.5rem 0 0;
   }
 }
 @media (max-width: 500px) {
