@@ -8,7 +8,7 @@ export default function Layout({ children, title }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="theme-color" content="#f9f9fb" />
+        <meta name="theme-color" content="#120717" />
         <meta
           name="description"
           content="Search Ultraman by ScreenShot. Lookup the exact moment and the episode."
