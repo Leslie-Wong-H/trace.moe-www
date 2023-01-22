@@ -210,8 +210,8 @@ const Index = () => {
 
     const response = await fetch(NEXT_PUBLIC_ANILIST_ENDPOINT, {
       method: "POST",
-      body: JSON.stringify({ ids: topResults.map((e) => String(e.anilist)) }),
-      headers: { "Content-Type": "application/json" },
+      body: new URLSearchParams({ ids: topResults.map((e) => String(e.anilist)) }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).catch((e) => console.log(e));
 
     if (!response || response.status >= 400) {
