@@ -40,19 +40,20 @@ ChartJS.register(
 
 const getDatabaseStatus = async () => {
   const status = await fetch(`${NEXT_PUBLIC_API_ENDPOINT}/status`).then((e) => e.json());
-  let numDocs = 0;
-  let totalSize = 0;
-  let lastModified = new Date(0);
-  for (const [_, server] of Object.entries(status)) {
-    for (const core of server) {
-      numDocs += core.index.numDocs;
-      totalSize += core.index.sizeInBytes;
-      lastModified =
-        lastModified > new Date(core.index.lastModified)
-          ? lastModified
-          : new Date(core.index.lastModified);
-    }
-  }
+  let numDocs = Number(status.rowCount) ?? 0;
+  let totalSize = status.totalSize ?? 0;
+  let lastModified = status.lastModified ? new Date(status.lastModified) : new Date(0);
+  // Now powered by Milvus Statistics instead of Solr Statistics
+  // for (const [_, server] of Object.entries(status)) {
+  //   for (const core of server) {
+  //     numDocs += core.index.numDocs;
+  //     totalSize += core.index.sizeInBytes;
+  //     lastModified =
+  //       lastModified > new Date(core.index.lastModified)
+  //         ? lastModified
+  //         : new Date(core.index.lastModified);
+  //   }
+  // }
   return {
     lastModified,
     numDocs,
@@ -459,10 +460,12 @@ const About = () => {
             </li>
             <li>
               Index Size:{" "}
-              {totalSize ? `${(totalSize / 1000000000).toFixed(2)} GB` : "calculating..."}
+              {totalSize ? `${(totalSize / (1024 * 1024 * 1024)).toFixed(2)} GB` : "calculating..."}
             </li>
           </ul>
-          <p>Last Database Update: {lastModified.toString()}</p>
+          <p>
+            Last Database Update: {lastModified.toLocaleString("en-US", { timeZone: "UTC" })} UTC+8
+          </p>
           <p>
             Check database coverage by Anilist ID:{" "}
             <input
