@@ -464,7 +464,8 @@ const About = () => {
             </li>
           </ul>
           <p>
-            Last Database Update: {lastModified.toLocaleString("en-US", { timeZone: "UTC" })} UTC+8
+            Last Database Update: {lastModified.toLocaleString("zh", { timeZone: "Asia/Shanghai" })}{" "}
+            UTC+8
           </p>
           <p>
             Check database coverage by Anilist ID:{" "}
