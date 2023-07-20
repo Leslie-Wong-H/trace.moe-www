@@ -1,6 +1,6 @@
 import { infoPane, title, subtitle, divider, poster, detail, footNotes } from "./info.module.css";
 
-export default function Layout({ anilist: src }) {
+export default function Layout({ imdb: src }) {
   if (!src) {
     return <div></div>;
   }
