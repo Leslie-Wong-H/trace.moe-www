@@ -43,7 +43,7 @@ const Index = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedResult, setSelectedResult] = useState();
   const [showNSFW, setShowNSFW] = useState(false);
-  const [anilistInfo, setAnilistInfo] = useState();
+  const [imdbInfo, setImdbInfo] = useState();
   const [playerSrc, setPlayerSrc] = useState();
   const [playerTimeCode, setPlayerTimeCode] = useState("");
   const [playerFileName, setPlayerFileName] = useState("");
@@ -145,7 +145,7 @@ const Index = () => {
     setMessageText("Searching...");
     setSearchResult([]);
     setSelectedResult();
-    setAnilistInfo();
+    setImdbInfo();
     setPlayerSrc();
     setPlayerFileName("");
     setPlayerTimeCode("");
@@ -210,15 +210,15 @@ const Index = () => {
 
     const response = await fetch(NEXT_PUBLIC_ANILIST_ENDPOINT, {
       method: "POST",
-      body: new URLSearchParams({ ids: topResults.map((e) => String(e.anilist)) }),
+      body: new URLSearchParams({ ids: topResults.map((e) => String(e.imdb)) }),
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).catch((e) => console.log(e));
 
     if (!response || response.status >= 400) {
       setMessageText("Failed to get Anilist info, please try again later.");
       const topResultsWithoutAnlist = topResults.map((entry) => {
-        const id = entry.anilist;
-        entry.anilist = {
+        const id = entry.imdb;
+        entry.imdb = {
           id,
           title: { native: id },
           isAdult: false,
@@ -286,10 +286,10 @@ const Index = () => {
       });
 
     const topResultsWithAnilist = topResults.map((entry) => {
-      const id = entry.anilist;
-      entry.anilist = anilistData.find((e) => e.doubanId == entry.anilist);
-      if (!entry.anilist) {
-        entry.anilist = {
+      const id = entry.imdb;
+      entry.imdb = anilistData.find((e) => e.doubanId == entry.imdb);
+      if (!entry.imdb) {
+        entry.imdb = {
           id,
           title: { native: id },
           isAdult: false,
@@ -297,7 +297,7 @@ const Index = () => {
       }
       entry.playResult = () => {
         setSelectedResult(entry);
-        setAnilistInfo(entry.anilist);
+        setImdbInfo(entry.imdb);
         setPlayerSrc(entry.video);
         setPlayerFileName(entry.filename);
         setPlayerTimeCode(entry.from);
@@ -306,7 +306,7 @@ const Index = () => {
     });
     setSearchResult(topResultsWithAnilist);
 
-    if (!topResultsWithAnilist[0].anilist?.isAdult && window.innerWidth > 1008) {
+    if (!topResultsWithAnilist[0].imdb?.isAdult && window.innerWidth > 1008) {
       topResultsWithAnilist[0].playResult();
     }
   };
@@ -411,7 +411,7 @@ const Index = () => {
                 <div className={messageTextLabel}>{messageText}</div>
               </div>
               {searchResult
-                .filter((e) => showNSFW || !e?.anilist?.isAdult)
+                .filter((e) => showNSFW || !e?.imdb?.isAdult)
                 .map((searchResult, i) => {
                   return (
                     <Result
@@ -421,7 +421,7 @@ const Index = () => {
                     ></Result>
                   );
                 })}
-              {searchResult.find((e) => e?.anilist?.isAdult) && (
+              {searchResult.find((e) => e?.imdb?.isAdult) && (
                 <div style={{ textAlign: "center" }}>
                   <button
                     onClick={(e) => {
@@ -429,7 +429,7 @@ const Index = () => {
                     }}
                   >
                     {showNSFW ? "Hide" : "Show"}{" "}
-                    {searchResult.filter((e) => e?.anilist?.isAdult).length} NSFW results
+                    {searchResult.filter((e) => e?.imdb?.isAdult).length} NSFW results
                   </button>
                 </div>
               )}
@@ -448,7 +448,7 @@ const Index = () => {
                 className={closeBtn}
                 onClick={(e) => {
                   setSelectedResult();
-                  setAnilistInfo();
+                  setImdbInfo();
                   setPlayerSrc();
                   setPlayerFileName("");
                   setPlayerTimeCode("");
@@ -456,7 +456,7 @@ const Index = () => {
               >
                 ❌
               </div>
-              {!isSearching && <Info anilist={anilistInfo}></Info>}
+              {!isSearching && <Info imdb={imdbInfo}></Info>}
             </div>
           </div>
         )}

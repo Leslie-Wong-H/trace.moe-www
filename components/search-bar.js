@@ -58,7 +58,7 @@ export default function SearchBar({
             //   <input
             //     type="text"
             //     className={anilistFilterInput}
-            //     placeholder="anilist ID"
+            //     placeholder="imdb ID"
             //     value={anilistFilter}
             //     onChange={(e) => {
             //       setAnilistFilter(e.target.value);

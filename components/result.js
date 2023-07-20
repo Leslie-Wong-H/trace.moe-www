@@ -19,11 +19,11 @@ export default function Result({ searchResult: entry, active: isActive }) {
   return (
     <div
       className={`${result} ${isActive ? active : ""}`}
-      style={{ display: entry.anilist.isAdult ? "hidden" : "flex" }}
+      style={{ display: entry.imdb.isAdult ? "hidden" : "flex" }}
       onClick={entry.playResult}
     >
       <div className={title}>
-        {entry.anilist?.name || entry.anilist?.originalName || entry.anilist?.alias}
+        {entry.imdb?.name || entry.imdb?.originalName || entry.imdb?.alias}
       </div>
       <div className={detail}>
         <div className={ep}>{entry.episode && `Episode ${zeroPad(entry.episode, 2)}`}</div>
