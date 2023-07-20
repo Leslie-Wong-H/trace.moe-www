@@ -27,7 +27,7 @@ module.exports = {
               "style-src * 'self' 'unsafe-inline'",
               `img-src * 'self' data: blob: ${NEXT_PUBLIC_MEDIA_ENDPOINT}`,
               "font-src 'self'",
-              "frame-src www.youtube-nocookie.com www.youtube.com www.google.com test.boost-art.net ultraman-shot.cc",
+              "frame-src www.youtube-nocookie.com www.youtube.com www.google.com test.boost-art.net ultraman-shot.cc www.ultraman-shot.cc",
               `media-src blob: 'self' ${NEXT_PUBLIC_MEDIA_ENDPOINT}`,
               "form-action 'self'",
               "base-uri 'none'",
