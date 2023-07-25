@@ -48,12 +48,12 @@ function init() {
     controls.enabled = false;
 
     const loader = new THREE.TextureLoader();
-    const textureSphereBg = loader.load('https://i.ibb.co/4gHcRZD/bg3-je3ddz.jpg');
-    const texturenucleus = loader.load('https://i.ibb.co/hcN2qXk/star-nc8wkw.jpg');
-    const textureStar = loader.load("https://i.ibb.co/ZKsdYSz/p1-g3zb2a.png");
-    const texture1 = loader.load("https://i.ibb.co/F8by6wW/p2-b3gnym.png");  
-    const texture2 = loader.load("https://i.ibb.co/yYS2yx5/p3-ttfn70.png");
-    const texture4 = loader.load("https://i.ibb.co/yWfKkHh/p4-avirap.png");
+    const textureSphereBg = loader.load('https://ultraman-shot.cc/img/bg3-je3ddz.jpg');
+    const texturenucleus = loader.load('https://ultraman-shot.cc/img/star-nc8wkw.jpg');
+    const textureStar = loader.load("https://ultraman-shot.cc/img/p1-g3zb2a.png");
+    const texture1 = loader.load("https://ultraman-shot.cc/img/p2-b3gnym.png");  
+    const texture2 = loader.load("https://ultraman-shot.cc/img/p3-ttfn70.png");
+    const texture4 = loader.load("https://ultraman-shot.cc/img/p4-avirap.png");
 
 
     /*  Nucleus  */   
