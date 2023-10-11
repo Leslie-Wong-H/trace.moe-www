@@ -312,7 +312,7 @@ const Index = () => {
   };
 
   return (
-    <Layout title="Ultraman Scene Search Engine">
+    <Layout title="奥特曼正义之光 - Ultraman Scene Search Engine">
       <Head>
         <meta name="theme-color" content="#f9f9fb" />
         <meta itemProp="name" content="WAIT: What Ultraman Is This?" />
