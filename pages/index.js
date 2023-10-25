@@ -45,6 +45,7 @@ const Index = () => {
   const [showNSFW, setShowNSFW] = useState(false);
   const [imdbInfo, setImdbInfo] = useState();
   const [playerSrc, setPlayerSrc] = useState();
+  const [duration, setDuration] = useState(0);
   const [playerTimeCode, setPlayerTimeCode] = useState("");
   const [playerFileName, setPlayerFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -226,6 +227,7 @@ const Index = () => {
         entry.playResult = () => {
           setSelectedResult(entry);
           setPlayerSrc(entry.video);
+          setDuration(entry.duration);
           setPlayerFileName(entry.filename);
           setPlayerTimeCode(entry.from);
         };
@@ -299,6 +301,7 @@ const Index = () => {
         setSelectedResult(entry);
         setImdbInfo(entry.imdb);
         setPlayerSrc(entry.video);
+        setDuration(entry.duration);
         setPlayerFileName(entry.filename);
         setPlayerTimeCode(entry.from);
       };
@@ -438,6 +441,7 @@ const Index = () => {
             <div className={selectedResult ? playerInfoPane : [playerInfoPane, hidden].join(" ")}>
               <Player
                 src={playerSrc}
+                duration={duration}
                 timeCode={playerTimeCode}
                 fileName={playerFileName}
                 isLoading={isLoading}
