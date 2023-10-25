@@ -18,10 +18,18 @@ import {
 } from "./player.module.css";
 import { formatTime } from "./utils";
 
-export default function Player({ src, fileName, onDrop, timeCode, isLoading, isSearching }) {
+export default function Player({
+  src,
+  duration: episodeDuration,
+  fileName,
+  onDrop,
+  timeCode,
+  isLoading,
+  isSearching,
+}) {
   const playerRef = useRef(null);
   const [isMute, setIsMute] = useState(true);
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(episodeDuration);
   const [playerWidth, setPlayerWidth] = useState(window.innerWidth > 640 ? 640 : window.innerWidth);
   const [playerHeight, setPlayerHeight] = useState(360);
   const [videoWidth, setVideoWidth] = useState(640);
@@ -50,11 +58,17 @@ export default function Player({ src, fileName, onDrop, timeCode, isLoading, isS
   }, []);
 
   useEffect(() => {
+    if (episodeDuration) {
+      setDuration(episodeDuration);
+    }
+  }, [episodeDuration]);
+
+  useEffect(() => {
     if (!src) return;
     playerRef.current.pause();
     setPlayerLoading(true);
     playerRef.current.style.opacity = 0;
-    setDuration(0);
+    // setDuration(0);
     (async () => {
       const response = await fetch(`${src}&size=l`);
       setPlayerSrc(URL.createObjectURL(await response.blob()));
