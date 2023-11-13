@@ -484,7 +484,7 @@ const Index = () => {
           <img src="/img/cosmos.png" className={coverFg} alt="" draggable="false" />
           <footer className={footer}>
             <img
-              src="/img/ultraman-shot-weapp.png"
+              src="/img/ultraman-shot-weapp-colorful.png"
               className={weapp}
               alt="weapp"
               draggable="false"
