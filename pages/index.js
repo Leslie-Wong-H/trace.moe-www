@@ -25,6 +25,8 @@ import {
   coverFg,
   iframeContainer,
   iframe,
+  footer,
+  weapp,
   icp,
 } from "../components/index.module.css";
 
@@ -480,9 +482,17 @@ const Index = () => {
             </div>
           </div>
           <img src="/img/cosmos.png" className={coverFg} alt="" draggable="false" />
-          <a href="http://beian.miit.gov.cn/" target="_blank">
-            <div className={icp}>粤ICP备18106486号</div>
-          </a>
+          <footer className={footer}>
+            <img
+              src="/img/ultraman-shot-weapp.png"
+              className={weapp}
+              alt="weapp"
+              draggable="false"
+            />
+            <a href="http://beian.miit.gov.cn/" className={icp} target="_blank">
+              <div>粤ICP备18106486号</div>
+            </a>
+          </footer>
         </div>
       </div>
     </Layout>

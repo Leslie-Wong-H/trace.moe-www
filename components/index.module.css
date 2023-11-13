@@ -257,10 +257,31 @@
   height: 100%;
 }
 
-.icp {
+.footer {
   position: absolute;
   right: 5px;
   bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.weapp {
+  width: 15rem;
+}
+
+@media (max-width: 480px) {
+  .weapp {
+    display: none;
+  }
+}
+
+.icp {
   color: #555;
   font-size: 14px;
+  text-align: center;
+}
+
+.icp:hover {
+  color: var(--text-strong-color);
 }
