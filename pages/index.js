@@ -59,7 +59,9 @@ const Index = () => {
       setSearchImageSrc(
         searchParams.get("url").startsWith(location.origin)
           ? searchParams.get("url")
-          : `https://trace.moe/image-proxy?url=${encodeURIComponent(searchParams.get("url"))}`
+          : `https://proxy.ultraman-shot.cc/proxy?url=${encodeURIComponent(
+              searchParams.get("url")
+            )}`
       );
     }
     document.addEventListener(
@@ -91,7 +93,9 @@ const Index = () => {
     }
     if (e.target.parentNode.checkValidity()) {
       setImageURL(e.target.value);
-      setSearchImageSrc(`https://trace.moe/image-proxy?url=${encodeURIComponent(e.target.value)}`);
+      setSearchImageSrc(
+        `https://proxy.ultraman-shot.cc/proxy?url=${encodeURIComponent(e.target.value)}`
+      );
       history.replaceState(null, null, `/?url=${encodeURIComponent(e.target.value)}`);
     } else {
       e.target.parentNode.querySelector("input[type=submit]").click();
